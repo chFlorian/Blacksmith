@@ -26,7 +26,7 @@ public enum ExportSize {
     public var cornerRadius: Double {
         switch self {
             case .iPhone:
-                return 40
+                return 20
             case .mac:
                 return 8
             case .custom(_, let radius):

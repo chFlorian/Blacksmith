@@ -9,9 +9,9 @@ import XCTest
 import SwiftUI
 
 public extension XCTestCase {
+#if os(macOS)
     func exportMarketing<V: View>(image: V, toURL url: URL) {
         do {
-#if os(macOS)
             guard let nsImage = image.renderAsImage(),
                   let representation = nsImage.tiffRepresentation else { return }
             
@@ -20,17 +20,23 @@ public extension XCTestCase {
             
             try pngData?.write(to: url)
             print("Blacksmith: ☑️ Exported marketing image to \(url).")
-#else
-            
-#endif
         } catch {
             print(error)
         }
     }
+#elseif os(iOS)
+    func createMarketing<V: View>(image: V, exportSize: ExportSize) -> XCTAttachment {
+        let uiImage = image.takeScreenshot(origin: .zero, size: exportSize.size)
+        
+        let attachment = XCTAttachment(image: uiImage)
+        
+        return attachment
+    }
+#endif
 }
 
 public extension XCUIScreenshot {
-    #if os(macOS)
+#if os(macOS)
     func quickExportWithTitle(
         _ title: String,
         background: ImageBackground,
@@ -62,7 +68,7 @@ public extension XCUIScreenshot {
             print(error)
         }
     }
-    #endif
+#endif
     
 #if os(iOS)
     func quickExportWithTitle(
@@ -82,7 +88,6 @@ public extension XCUIScreenshot {
         )
         
         let uiImage = capturingView.takeScreenshot(origin: .zero, size: exportSize.size)
-        UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
         
         let attachment = XCTAttachment(image: uiImage)
         attachment.name = title
