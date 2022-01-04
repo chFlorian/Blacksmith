@@ -72,7 +72,7 @@ public extension XCUIScreenshot {
         alignment: TitleAlignment,
         font: Font = .system(size: 50, weight: .regular, design: .rounded)
     ) -> XCTAttachment? {
-        let image = ScreenshotWithTitle(
+        let capturingView = ScreenshotWithTitle(
             title: title,
             image: Image(uiImage: self.image),
             background: background,
@@ -81,7 +81,7 @@ public extension XCUIScreenshot {
             font: font
         )
         
-        let uiImage = image.snapshot(withSize: exportSize.size)
+        let uiImage = capturingView.snapshot(withSize: exportSize.size)
         
         return XCTAttachment(image: uiImage)
     }

@@ -9,8 +9,6 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 
-import SwiftUI
-
 extension View {
     func snapshot(withSize size: CGSize) -> UIImage {
         let controller = UIHostingController(rootView: self.frame(width: size.width, height: size.height))
