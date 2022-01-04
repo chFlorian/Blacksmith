@@ -37,17 +37,3 @@ public class NoInsetHostingView<V>: NSHostingView<V> where V: View {
         return .init()
     }
 }
-
-public func exportMarketing<V: View>(image: V, toURL url: URL) {
-    do {
-        guard let nsImage = image.renderAsImage(),
-              let representation = nsImage.tiffRepresentation else { return }
-        
-        guard let bitmap = NSBitmapImageRep(data: representation) else { return }
-        let pngData = bitmap.representation(using: .png, properties: [:])
-        
-        try pngData?.write(to: url)
-    } catch {
-        print(error)
-    }
-}
