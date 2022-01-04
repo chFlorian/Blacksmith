@@ -37,7 +37,7 @@ class ForgeUITests: XCTestCase {
 ### 4. Navigate to the screen that should be exported
 
 ```swift
-        let window = XCUIApplication().windows.firstMatch
+        let window = app.windows.firstMatch
         window.outlines.buttons["🛠 Layout Builder"].click()
         
         let addElementButton = window.toolbars.buttons["Add Element"]
