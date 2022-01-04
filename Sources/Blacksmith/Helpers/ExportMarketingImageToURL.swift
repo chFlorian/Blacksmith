@@ -81,7 +81,7 @@ public extension XCUIScreenshot {
             font: font
         )
         
-        let uiImage = capturingView.snapshot(withSize: exportSize.size)
+        let uiImage = capturingView.background(.red).snapshot(withSize: exportSize.size)
         UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
         
         let attachment = XCTAttachment(image: uiImage)
