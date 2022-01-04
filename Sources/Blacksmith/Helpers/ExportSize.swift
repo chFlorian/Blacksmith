@@ -5,7 +5,7 @@
 //  Created by Florian Schweizer on 03.01.22.
 //
 
-import Foundation
+import SwiftUI
 
 public enum ExportSize {
     case iPhone

@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct ScreenshotWithTitle: View, CapturingView {
     public let title: String
-    public let image: NSImage
+    public let image: Image
     public let background: ImageBackground
     public let exportSize: ExportSize
     public let alignment: TitleAlignment
@@ -17,7 +17,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
     
     public init(
         title: String,
-        image: NSImage,
+        image: Image,
         background: ImageBackground,
         exportSize: ExportSize,
         alignment: TitleAlignment = .titleAbove,
@@ -53,7 +53,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
                     Spacer()
                 }
                 
-                Image(nsImage: image)
+                image
                     .resizable()
                     .cornerRadius(exportSize.cornerRadius)
                     .scaledToFit()

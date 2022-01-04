@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+#if os(macOS)
+@available(macOS 10.15, *)
 public extension NSView {
     func bitmapImage() -> NSImage? {
         guard let rep = bitmapImageRepForCachingDisplay(in: bounds) else {
@@ -23,6 +25,7 @@ public extension NSView {
     }
 }
 
+@available(macOS 10.15, *)
 public extension View {
     func renderAsImage() -> NSImage? {
         let view = NoInsetHostingView(rootView: self)
@@ -32,8 +35,10 @@ public extension View {
     }
 }
 
+@available(macOS 10.15, *)
 public class NoInsetHostingView<V>: NSHostingView<V> where V: View {
     override public var safeAreaInsets: NSEdgeInsets {
         return .init()
     }
 }
+#endif
