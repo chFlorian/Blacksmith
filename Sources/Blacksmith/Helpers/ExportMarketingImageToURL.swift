@@ -83,7 +83,10 @@ public extension XCUIScreenshot {
         
         let uiImage = capturingView.snapshot(withSize: exportSize.size)
         
-        return XCTAttachment(image: uiImage)
+        let attachment = XCTAttachment(image: uiImage)
+        attachment.name = title
+        
+        return attachment
     }
 #endif
 }
