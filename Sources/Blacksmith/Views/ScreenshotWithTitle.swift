@@ -12,7 +12,21 @@ public struct ScreenshotWithTitle: View {
     public let image: NSImage
     public let backgroundColor: Color
     public let cornerRadius: Double
-    public var font: Font = .system(size: 50, weight: .regular, design: .rounded)
+    public let font: Font
+    
+    public init(
+        title: String,
+        image: NSImage,
+        backgroundColor: Color,
+        cornerRadius: Double,
+        font: Font = .system(size: 50, weight: .regular, design: .rounded)
+    ) {
+        self.title = title
+        self.image = image
+        self.backgroundColor = backgroundColor
+        self.cornerRadius = cornerRadius
+        self.font = font
+    }
     
     public var body: some View {
         VStack {
