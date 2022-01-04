@@ -49,7 +49,7 @@ public extension XCUIScreenshot {
             guard let bitmap = NSBitmapImageRep(data: representation) else { return }
             let pngData = bitmap.representation(using: .png, properties: [:])
             
-            let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("\(title).png")
+            let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("\(title.replacingOccurrences(of: ".", with: "")).png")
             
             try pngData?.write(to: url)
             print("Blacksmith: ☑️ Exported marketing image to \(url).")
