@@ -82,9 +82,8 @@ public extension XCUIScreenshot {
         )
         
         let uiImage = image.snapshot()
-        guard let pngData = uiImage.pngData() else { return nil }
         
-        return XCTAttachment(data: pngData, uniformTypeIdentifier: "png")
+        return XCTAttachment(image: uiImage)
     }
 #endif
 }
