@@ -81,7 +81,7 @@ public extension XCUIScreenshot {
             font: font
         )
         
-        let uiImage = image.snapshot()
+        let uiImage = image.snapshot(withSize: exportSize.size)
         
         return XCTAttachment(image: uiImage)
     }
