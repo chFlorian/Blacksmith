@@ -8,7 +8,11 @@ To install, add the package via this url: `https://github.com/orgs/BlacksmithApp
 
 ## Usage
 
+Blacksmith is used to automatically generated simple App Store screenshots for multiple localizations.
+
 ```swift
+0. Add Blacksmith to your UITest target & import Blacksmith
+import Blacksmith
 import XCTest
 import SwiftUI
 
@@ -37,6 +41,8 @@ class ForgeUITests: XCTestCase {
         // 5. Choose a location for the generated image and export it
         let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("result.png")
         exportMarketing(image: testView, toURL: url, withSize: exportSize.size)
+        
+        app.terminate()
     }
 }
 ```
