@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ScreenshotWithTitle: View {
-    let title: String
-    let image: NSImage
-    let backgroundColor: Color
-    let cornerRadius: Double
-    var font: Font = .system(size: 50, weight: .regular, design: .rounded)
+public struct ScreenshotWithTitle: View {
+    public let title: String
+    public let image: NSImage
+    public let backgroundColor: Color
+    public let cornerRadius: Double
+    public var font: Font = .system(size: 50, weight: .regular, design: .rounded)
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Text(title)
                 .font(font)

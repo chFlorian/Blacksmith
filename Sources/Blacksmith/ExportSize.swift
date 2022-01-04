@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ExportSize {
+public enum ExportSize {
     case iPhone
     case mac
     
-    var size: CGSize {
+    public var size: CGSize {
         switch self {
             case .iPhone:
                 return CGSize(width: 1242, height: 2688)
@@ -20,7 +20,7 @@ enum ExportSize {
         }
     }
     
-    var cornerRadius: Double {
+    public var cornerRadius: Double {
         switch self {
             case .iPhone:
                 return 40

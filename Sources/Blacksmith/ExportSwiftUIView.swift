@@ -23,7 +23,7 @@ public extension NSView {
     }
 }
 
-extension View {
+public extension View {
     func renderAsImage() -> NSImage? {
         let view = NoInsetHostingView(rootView: self)
         view.setFrameSize(view.fittingSize)
@@ -32,13 +32,13 @@ extension View {
     }
 }
 
-class NoInsetHostingView<V>: NSHostingView<V> where V: View {
-    override var safeAreaInsets: NSEdgeInsets {
+public class NoInsetHostingView<V>: NSHostingView<V> where V: View {
+    override public var safeAreaInsets: NSEdgeInsets {
         return .init()
     }
 }
 
-func exportMarketing<V: View>(image: V, toURL url: URL, withSize size: CGSize) {
+public func exportMarketing<V: View>(image: V, toURL url: URL, withSize size: CGSize) {
     do {
         let exportView = image.frame(width: size.width, height: size.height)
         
