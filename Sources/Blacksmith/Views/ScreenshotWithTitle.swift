@@ -12,6 +12,7 @@ public struct ScreenshotWithTitle: View {
     public let image: NSImage
     public let backgroundColor: Color
     public let cornerRadius: Double
+    public let alignment: TitleAlignment
     public let font: Font
     
     public init(
@@ -19,28 +20,40 @@ public struct ScreenshotWithTitle: View {
         image: NSImage,
         backgroundColor: Color,
         cornerRadius: Double,
+        alignment: TitleAlignment = .titleAbove,
         font: Font = .system(size: 50, weight: .regular, design: .rounded)
     ) {
         self.title = title
         self.image = image
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
+        self.alignment = alignment
         self.font = font
     }
     
     public var body: some View {
         VStack {
-            Text(title)
-                .font(font)
-                .padding(.top)
-            
-            Spacer()
+            if case let .titleAbove = alignment {
+                Text(title)
+                    .font(font)
+                    .padding(.top)
+                
+                Spacer()
+            }
             
             Image(nsImage: image)
                 .resizable()
                 .cornerRadius(cornerRadius)
                 .scaledToFit()
                 .padding()
+            
+            if case let .titleBelow = alignment {
+                Spacer()
+                
+                Text(title)
+                    .font(font)
+                    .padding(.bottom)
+            }
         }
         .padding()
         .background(backgroundColor)
