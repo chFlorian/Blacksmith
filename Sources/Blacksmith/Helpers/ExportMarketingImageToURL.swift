@@ -30,6 +30,7 @@ public extension XCTestCase {
 }
 
 public extension XCUIScreenshot {
+    #if os(macOS)
     func quickExportWithTitle(
         _ title: String,
         background: ImageBackground,
@@ -38,7 +39,6 @@ public extension XCUIScreenshot {
         font: Font = .system(size: 50, weight: .regular, design: .rounded)
     ) {
         do {
-#if os(macOS)
             let image = ScreenshotWithTitle(
                 title: title,
                 image: Image(nsImage: self.image),
@@ -58,25 +58,33 @@ public extension XCUIScreenshot {
             
             try pngData?.write(to: url)
             print("Blacksmith: ☑️ Exported marketing image to \(url).")
-#elseif os(iOS)
-            let image = ScreenshotWithTitle(
-                title: title,
-                image: Image(uiImage: self.image),
-                background: background,
-                exportSize: exportSize,
-                alignment: alignment,
-                font: font
-            )
-            
-            let uiImage = image.snapshot()
-            let pngData = uiImage.pngData()
-            let url = URL(string: "file:///Users/flo/Library/Containers/fschweizer.ForgeUITests.xctrunner/Data/\(title.replacingOccurrences(of: ".", with: "")).png")!
-            try pngData?.write(to: url)
-            
-            print("Blacksmith: ☑️ Tried to export image somewhere...")
-#endif
         } catch {
             print(error)
         }
     }
+    #endif
+    
+#if os(iOS)
+    func quickExportWithTitle(
+        _ title: String,
+        background: ImageBackground,
+        exportSize: ExportSize,
+        alignment: TitleAlignment,
+        font: Font = .system(size: 50, weight: .regular, design: .rounded)
+    ) -> XCTAttachment? {
+        let image = ScreenshotWithTitle(
+            title: title,
+            image: Image(uiImage: self.image),
+            background: background,
+            exportSize: exportSize,
+            alignment: alignment,
+            font: font
+        )
+        
+        let uiImage = image.snapshot()
+        guard let pngData = uiImage.pngData() else { return nil }
+        
+        return XCTAttachment(data: pngData, uniformTypeIdentifier: "png")
+    }
+#endif
 }
