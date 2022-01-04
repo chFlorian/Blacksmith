@@ -10,7 +10,7 @@ import SwiftUI
 public struct ScreenshotWithTitle: View {
     public let title: String
     public let image: NSImage
-    public let backgroundColor: Color
+    public let background: ImageBackground
     public let cornerRadius: Double
     public let alignment: TitleAlignment
     public let font: Font
@@ -18,44 +18,56 @@ public struct ScreenshotWithTitle: View {
     public init(
         title: String,
         image: NSImage,
-        backgroundColor: Color,
+        background: ImageBackground,
         cornerRadius: Double,
         alignment: TitleAlignment = .titleAbove,
         font: Font = .system(size: 50, weight: .regular, design: .rounded)
     ) {
         self.title = title
         self.image = image
-        self.backgroundColor = backgroundColor
+        self.background = background
         self.cornerRadius = cornerRadius
         self.alignment = alignment
         self.font = font
     }
     
     public var body: some View {
-        VStack {
-            if case let .titleAbove = alignment {
-                Text(title)
-                    .font(font)
-                    .padding(.top)
-                
-                Spacer()
+        ZStack {
+            switch background {
+                case .color(let color):
+                    color
+                case .gradient(let linearGradient):
+                    linearGradient
+                case .image(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
             }
             
-            Image(nsImage: image)
-                .resizable()
-                .cornerRadius(cornerRadius)
-                .scaledToFit()
-                .padding()
-            
-            if case let .titleBelow = alignment {
-                Spacer()
+            VStack {
+                if case .titleAbove = alignment {
+                    Text(title)
+                        .font(font)
+                        .padding(.top)
+                    
+                    Spacer()
+                }
                 
-                Text(title)
-                    .font(font)
-                    .padding(.bottom)
+                Image(nsImage: image)
+                    .resizable()
+                    .cornerRadius(cornerRadius)
+                    .scaledToFit()
+                    .padding()
+                
+                if case .titleBelow = alignment {
+                    Spacer()
+                    
+                    Text(title)
+                        .font(font)
+                        .padding(.bottom)
+                }
             }
+            .padding()
         }
-        .padding()
-        .background(backgroundColor)
     }
 }
