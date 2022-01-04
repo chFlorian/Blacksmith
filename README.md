@@ -50,15 +50,15 @@ class ForgeUITests: XCTestCase {
         let screenshot = app.screenshot()
 ```
 
-### 6. Setup an ExportSize & a Capturing View
+### 6. Setup a Capturing View
 
 ```swift
         let exportSize = ExportSize.mac
         let capturingView = ScreenshotWithTitle(
             title: "Create your own image layouts.", 
             image: screenshot.image, 
-            background: .color(.blue), 
-            cornerRadius: exportSize.cornerRadius
+            background: .color(.blue),
+            exportSize: .mac
         )    
 ```
 
@@ -66,7 +66,7 @@ class ForgeUITests: XCTestCase {
 
 ```swift
         let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("result.png")
-        exportMarketing(image: capturingView, toURL: url, withSize: exportSize.size)
+        exportMarketing(image: capturingView, toURL: url)
 ```
 
 ### 8. Clean up
@@ -103,12 +103,12 @@ class ForgeUITests: XCTestCase {
         let capturingView = ScreenshotWithTitle(
             title: "Create your own image layouts.", 
             image: screenshot.image, 
-            background: .color(.blue), 
-            cornerRadius: exportSize.cornerRadius
+            background: .color(.blue),
+            exportSize: .mac
         ) 
         
         let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("result.png")
-        exportMarketing(image: capturingView, toURL: url, withSize: exportSize.size)
+        exportMarketing(image: capturingView, toURL: url)
         
         app.terminate()
     }

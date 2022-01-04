@@ -38,11 +38,9 @@ public class NoInsetHostingView<V>: NSHostingView<V> where V: View {
     }
 }
 
-public func exportMarketing<V: View>(image: V, toURL url: URL, withSize size: CGSize) {
+public func exportMarketing<V: View>(image: V, toURL url: URL) {
     do {
-        let exportView = image.frame(width: size.width, height: size.height)
-        
-        guard let nsImage = exportView.renderAsImage(),
+        guard let nsImage = image.renderAsImage(),
               let representation = nsImage.tiffRepresentation else { return }
         
         guard let bitmap = NSBitmapImageRep(data: representation) else { return }
