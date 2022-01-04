@@ -50,6 +50,10 @@ class ForgeUITests: XCTestCase {
         let screenshot = app.screenshot()
 ```
 
+### 5. (A) Use the quickExportWithTitle function on screenshot
+
+You can either use quickExportWithTitle directly on the XCUIScreenshot or follow step 6 and 7
+
 ### 6. Setup a Capturing View
 
 ```swift
