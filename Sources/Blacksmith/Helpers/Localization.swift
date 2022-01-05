@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct Localization: Identifiable {
-    let id = UUID()
-    let locale: String
-    let title: String
+public struct Localization: Identifiable {
+    public let id = UUID()
+    public let locale: String
+    public let title: String
+    
+    public init(locale: String, title: String) {
+        self.locale = locale
+        self.title = title
+    }
 }
