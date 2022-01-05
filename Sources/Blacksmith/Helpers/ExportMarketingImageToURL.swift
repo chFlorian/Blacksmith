@@ -52,7 +52,7 @@ public extension XCUIScreenshot {
                 exportSize: exportSize,
                 alignment: alignment,
                 font: font
-            ).ignoresSafeArea()
+            ).edgesIgnoringSafeArea(.all)
             
             guard let nsImage = image.renderAsImage(),
                   let representation = nsImage.tiffRepresentation else { return }
@@ -85,7 +85,7 @@ public extension XCUIScreenshot {
             exportSize: exportSize,
             alignment: alignment,
             font: font
-        ).ignoresSafeArea()
+        ).edgesIgnoringSafeArea(.all)
         
         let uiImage = capturingView.takeScreenshot(origin: .zero, size: exportSize.size)
         
