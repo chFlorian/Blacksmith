@@ -29,6 +29,7 @@ public extension XCTestCase {
         let uiImage = image.takeScreenshot(origin: .zero, size: exportSize.size)
         
         let attachment = XCTAttachment(image: uiImage)
+        attachment.lifetime = .keepAlways
         
         return attachment
     }
@@ -91,6 +92,7 @@ public extension XCUIScreenshot {
         
         let attachment = XCTAttachment(image: uiImage)
         attachment.name = title
+        attachment.lifetime = .keepAlways
         
         return attachment
     }
