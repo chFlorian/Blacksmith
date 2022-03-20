@@ -14,6 +14,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
     public let exportSize: ExportSize
     public let alignment: TitleAlignment
     public let font: Font
+    public let foregroundColor: Color
     
     public init(
         title: String,
@@ -21,7 +22,8 @@ public struct ScreenshotWithTitle: View, CapturingView {
         background: ImageBackground,
         exportSize: ExportSize,
         alignment: TitleAlignment = .titleAbove,
-        font: Font = .system(size: 50, weight: .regular, design: .rounded)
+        font: Font = .system(size: 50, weight: .regular, design: .rounded),
+        foregroundColor: Color = .primary
     ) {
         self.title = title
         self.image = image
@@ -29,6 +31,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
         self.exportSize = exportSize
         self.alignment = alignment
         self.font = font
+        self.foregroundColor = foregroundColor
     }
     
     public var body: some View {
@@ -42,6 +45,8 @@ public struct ScreenshotWithTitle: View, CapturingView {
                     image
                         .resizable()
                         .scaledToFill()
+                        .frame(width: exportSize.size.width, height: exportSize.size.height)
+                        .clipped()
             }
             
             VStack {
@@ -49,6 +54,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
                     Text(title)
                         .font(font)
                         .padding(.top)
+                        .foregroundColor(foregroundColor)
                     
                     Spacer()
                 }
@@ -65,6 +71,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
                     Text(title)
                         .font(font)
                         .padding(.bottom)
+                        .foregroundColor(foregroundColor)
                 }
             }
             .padding()
