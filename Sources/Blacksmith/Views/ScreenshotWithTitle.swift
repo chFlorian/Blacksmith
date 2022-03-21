@@ -22,7 +22,7 @@ public struct ScreenshotWithTitle: View, CapturingView {
         background: ImageBackground,
         exportSize: ExportSize,
         alignment: TitleAlignment = .titleAbove,
-        font: Font = .system(size: 75, weight: .regular, design: .rounded),
+        font: Font = .system(size: 50, weight: .regular, design: .rounded),
         foregroundColor: Color = .primary
     ) {
         self.title = title
