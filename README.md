@@ -4,7 +4,11 @@ Automated and localized App Store Screenshots without leaving Xcode.
 
 ## Installation Instructions
 Blacksmith supports installation via Swift Package Manager.
-To install, add the package via this url: `https://github.com/orgs/BlacksmithApp/Blacksmith`
+To install, add the package via this url: 
+
+```
+https://github.com/chFlorian/Blacksmith
+```
 
 ## Usage
 
