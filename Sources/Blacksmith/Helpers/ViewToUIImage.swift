@@ -26,17 +26,15 @@ extension View {
 
 extension UIView {
     var renderedImage: UIImage {
-        let rect = self.bounds
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
         
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        let context: CGContext = UIGraphicsGetCurrentContext()!
+        let renderer = UIGraphicsImageRenderer(size: bounds.size, format: format)
+        let pngData = renderer.pngData { context in
+            self.drawHierarchy(in: bounds, afterScreenUpdates: true)
+        }
         
-        self.layer.render(in: context)
-        
-        let capturedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
-        UIGraphicsEndImageContext()
-        return capturedImage
+        return UIImage(data: pngData) ?? UIImage(systemName: "exclamationmark.triangle.fill")!
     }
 }
 #endif
